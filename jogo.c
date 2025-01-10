@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define NUMERO_DE_TENTATIVAS 5
+
 
 int main()
 {
@@ -12,28 +12,28 @@ int main()
     printf("\n");
     int numeroSecreto = 42;
     int chute;
+    int ganhou = 0;
+    int tentativas = 1;
     
-    for (int i = 1; i <= NUMERO_DE_TENTATIVAS; i++)
-    {
+    while (ganhou == 0){
         printf("Qual é o seu chute? ");
         scanf("%d", &chute);
-        printf("Tentativa %d de %d\n", i, NUMERO_DE_TENTATIVAS);
+        printf("Tentativa %d de \n", tentativas);
         printf("Seu chute foi %d\n", chute);
 
         if(chute < 0){
             printf("Você não pode chutar números negativos\n");
-            i--;
             continue;
         }
 
         int acertou = (chute == numeroSecreto);
         int maior = chute > numeroSecreto;
-        int menor = chute < numeroSecreto;
+        
 
         if (acertou)
         {
             printf("Parabéns você acertou o número secreto\n");
-            break;
+            ganhou = 1;
         }
         else if(maior){
             
@@ -42,8 +42,10 @@ int main()
         else{
             printf("Seu chute foi menor que o número secreto\n");
         }
+        tentativas++;
         
     }
     printf("fim de jogo\n");
+    printf("Você acertou em %d tentativas\n", tentativas-1);
     return 0;
 }
