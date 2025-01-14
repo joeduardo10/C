@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-
-int main()
+    int main()
 {
     // Imprime o cabeçalho do jogo
     printf("********************************************************\n");
@@ -10,11 +10,15 @@ int main()
     printf("* Vamos ver se você consegue adivinhar o número secreto*\n");
     printf("********************************************************\n");
     printf("\n");
-    int numeroSecreto = 42;
+    int segundos = time(0);
+    srand(segundos);
+    int numeroGrande = rand();
+    int numeroSecreto = numeroGrande % 100;
     int chute;
     int tentativas = 1;
+    double pontos = 1000;
     
-    while (1){
+    while(1){
         printf("Qual é o seu chute? ");
         scanf("%d", &chute);
         printf("Tentativa %d de \n", tentativas);
@@ -40,9 +44,12 @@ int main()
             printf("Seu chute foi menor que o número secreto\n");
         }
         tentativas++;
-        
+        double pontosPerdidos = abs(chute - numeroSecreto) / (double)2;
+        pontos -= pontosPerdidos;
+
     }
     printf("fim de jogo\n");
     printf("Você acertou em %d tentativas\n", tentativas);
+    printf("Total de pontos: %.1f\n", pontos);
     return 0;
 }
