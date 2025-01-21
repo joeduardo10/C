@@ -44,7 +44,7 @@ int main()
         printf("\n"); //\n\n
         
         chuta(chutes,tentativas);
-        tentativas ++;
+        tentativas++;
 
     } while (!acertou && !enforcou);
 }
