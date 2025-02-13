@@ -12,7 +12,8 @@ void liberaMapa(){
     }
     free(mapa);
 }
-void alocamapa(){mapa = malloc(sizeof(char*)* linhas);
+void alocamapa(){
+    mapa = malloc(sizeof(char*)* linhas);
     for(int i =0; i<linhas; i++){
         mapa[i] = malloc(sizeof(char)* (colunas+1));
     }
@@ -34,15 +35,57 @@ void lemapa(){
         }
         fclose(f);
 }
+void imprimemapa() {
+    for(int i = 0; i < linhas; i++) {
+        printf("%s\n", mapa[i]);
+    }
+}
+int acabou(){
+    return 0;
+}
+void move(char direcao){
+    int x;
+    int y;
+    // acha a posiçao do fogefoge
+    for(int i =0; i<linhas; i++){
+        for(int j =0; j<colunas; j++){
+            if(mapa[i][j] == '@'){
+                x = i;
+                y = j;
+                break;
+            }
+        }
+    }
+    switch (direcao){
+    case 'a':  //esquerda
+        mapa[x][y-1]= '@';
+        break;
+    case 'w': //cima
+    mapa[x-1][y]= '@';
+        break;
+    case 's': ///baixo
+        mapa[x+1][y]= '@';
+        break;
+    case 'd':   //direita
+        mapa[x][y+1]= '@';
+        break;
+    }
+    mapa[x][y] = '.';
+}
 
-int main(){
+ int main(){
 
     lemapa();
 
-    for(int i =0; i<5; i++){
-     printf("%s\n", mapa[i]);
-    }
+    do{
+        imprimemapa();
+        char comando;
+        scanf(" %c", &comando);
+        move(comando);
 
- liberaMapa();
+    }while(!acabou());
+
+
+    liberaMapa();
               
     }
