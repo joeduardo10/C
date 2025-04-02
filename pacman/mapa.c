@@ -35,20 +35,26 @@ int ehvazia(MAPA* m, int x, int y){
    return  m->matriz[x][y] == VAZIO;
 }
 
-void encontramapa(MAPA *m, POSICAO *p, char c){
-    // acha a posiçao do fogefoge
-    for (int i = 0; i < m->linhas; i++)
-    {
-        for (int j = 0; j < m->colunas; j++)
-        {
-            if (m->matriz[i][j] == c)
-            {
-                p-> x = i;
-                p-> y = j;
-                break;
+int encontramapa(MAPA* m, POSICAO* p, char c) {
+
+    for(int i = 0; i < m->linhas; i++) {
+        for(int j = 0; j < m->colunas; j++) {
+            if(m->matriz[i][j] == c) {
+                p->x = i;
+                p->y = j;
+                return 1;
             }
         }
     }
+
+    // não encontramos!
+    return 0;
+}
+
+int podeandar(MAPA* m, int x, int y) {
+    return 
+        ehvalida(m, x, y) && 
+        ehvazia(m, x, y);
 }
 
 void lemapa(MAPA* m){
